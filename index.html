@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CineNatal | Filmes de Natal</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#101b19;color:#fff;font-family:Arial,sans-serif}
+header{background:linear-gradient(120deg,#761b27,#183e31);padding:35px 20px;text-align:center}
+header h1{font-size:38px;margin:5px}
+header p{color:#f5dfc1}
+nav{padding:15px;text-align:center;background:#142522;position:sticky;top:0;z-index:2}
+nav a{color:#f3d9ae;text-decoration:none;margin:0 12px;font-size:14px}
+.hero{padding:45px 22px;text-align:center;background:linear-gradient(#0007,#0009),radial-gradient(circle at top,#8b3435,#172923)}
+.hero h2{font-size:30px;color:#ffe1b0}
+.hero button,.watch{background:#b72e3d;color:white;border:0;border-radius:25px;padding:12px 20px;cursor:pointer;text-decoration:none;display:inline-block}
+.search{max-width:550px;margin:25px auto;padding:0 15px}
+.search input{width:100%;padding:15px;border-radius:25px;border:0;font-size:16px}
+.categories{text-align:center;padding:10px}
+.categories button{margin:5px;padding:9px 15px;border:1px solid #b68a55;border-radius:20px;background:transparent;color:#f5d9ae;cursor:pointer}
+.categories button.active{background:#a72b39;color:white}
+h2.section{padding:10px 22px;color:#f4d5a6}
+.catalog{display:grid;grid-template-columns:repeat(auto-fit,minmax(175px,1fr));gap:18px;padding:15px 22px 40px;max-width:1200px;margin:auto}
+.movie{background:#1b2b27;border-radius:13px;overflow:hidden;box-shadow:0 5px 15px #0005;transition:.2s}
+.movie:hover{transform:translateY(-5px)}
+.poster{height:230px;display:flex;align-items:center;justify-content:center;text-align:center;padding:15px;font-size:54px;background:linear-gradient(145deg,#7e2635,#183c30)}
+.poster span{font-size:19px;font-weight:bold;display:block;margin-top:10px}
+.info{padding:14px}
+.info h3{margin:0 0 8px;color:#f6d9a8;font-size:17px}
+.info p{font-size:13px;line-height:1.5;color:#d4d9d5;min-height:58px}
+.info small{display:block;color:#a9c4b3;margin-bottom:12px}
+.watch{font-size:13px;padding:10px 14px}
+.empty{text-align:center;padding:35px;display:none}
+footer{background:#142522;text-align:center;padding:25px;color:#c5c5c5;font-size:13px}
+</style>
+</head>
+<body>
+
+<header>
+<h1>🎄 CineNatal</h1>
+<p>Seu cantinho de filmes para viver a magia do Natal!</p>
+</header>
+
+<nav>
+<a href="#inicio">Início</a>
+<a href="#catalogo">Filmes</a>
+<a href="#onde">Onde assistir</a>
+</nav>
+
+<section class="hero" id="inicio">
+<h2>✨ O Natal começa com uma boa história!</h2>
+<p>Prepare a pipoca, escolha seu filme e aproveite.</p>
+<button onclick="document.getElementById('catalogo').scrollIntoView({behavior:'smooth'})">Explorar filmes</button>
+</section>
+
+<div class="search">
+<input id="search" type="search" placeholder="🔎 Pesquisar filme..." oninput="filterMovies()">
+</div>
+
+<div class="categories">
+<button class="active" onclick="category('Todos',this)">Todos</button>
+<button onclick="category('Romance',this)">❤️ Romance</button>
+<button onclick="category('Família',this)">👨‍👩‍👧 Família</button>
+<button onclick="category('Clássico',this)">🎅 Clássicos</button>
+<button onclick="category('Fantasia',this)">✨ Fantasia</button>
+</div>
+
+<h2 class="section" id="catalogo">🍿 Nosso catálogo de Natal</h2>
+<main class="catalog" id="movies"></main>
+<div class="empty" id="empty">Nenhum filme encontrado. Tente outra pesquisa! 🎄</div>
+
+<h2 class="section" id="onde">📺 Onde encontrar filmes gratuitos?</h2>
+<div class="catalog">
+<div class="movie"><div class="poster">📺</div><div class="info"><h3>YouTube</h3><p>Pesquise filmes completos de Natal dublados e publicados legalmente.</p><a class="watch" href="https://www.youtube.com/results?search_query=filmes+de+natal+completos+dublados" target="_blank">Explorar</a></div></div>
+<div class="movie"><div class="poster">🎬</div><div class="info"><h3>Pluto TV</h3><p>Plataforma gratuita com filmes e canais com anúncios.</p><a class="watch" href="https://pluto.tv/br" target="_blank">Assistir</a></div></div>
+<div class="movie"><div class="poster">🍿</div><div class="info"><h3>Plex</h3><p>Explore filmes gratuitos disponíveis no catálogo.</p><a class="watch" href="https://watch.plex.tv/" target="_blank">Assistir</a></div></div>
+</div>
+
+<footer>
+🎄 CineNatal © 2026<br><br>
+Um lugar especial para celebrar a magia do Natal ❤️<br>
+A disponibilidade dos filmes varia conforme a plataforma e a região.
+</footer>
+
+<script>
+const films=[
+{title:"Um Homem de Família",year:2000,genre:"Romance",emoji:"❤️",desc:"Uma história emocionante sobre amor, família e escolhas da vida.",search:"Um Homem de Família 2000 filme"},
+{title:"O Natal dos Coopers",year:2015,genre:"Família",emoji:"🎁",desc:"Uma família se reúne para celebrar o Natal em meio a surpresas.",search:"O Natal dos Coopers filme"},
+{title:"Surpresas do Amor",year:2008,genre:"Romance",emoji:"💑",desc:"Um casal enfrenta os desafios de visitar quatro famílias no Natal.",search:"Surpresas do Amor 2008 filme"},
+{title:"A Felicidade Não se Compra",year:1946,genre:"Clássico",emoji:"⭐",desc:"Uma bela história sobre esperança, generosidade e o valor da vida.",search:"A Felicidade Não se Compra 1946 filme completo"},
+{title:"De Ilusão Também se Vive",year:1947,genre:"Fantasia",emoji:"🎅",desc:"Um homem que diz ser Papai Noel precisa provar sua identidade.",search:"De Ilusão Também se Vive 1947 filme"},
+{title:"12 Presentes de Natal",year:2015,genre:"Romance",emoji:"🎁",desc:"Uma história leve de romance e generosidade natalina.",search:"12 Gifts of Christmas 2015"},
+{title:"Natal para Sempre",year:2026,genre:"Romance",emoji:"💖",desc:"E se o Natal acontecesse todos os dias? Uma história de amor.",search:"Natal para Sempre filmes completos dublados"},
+{title:"Natal na Fazenda da Família Carbell",year:2025,genre:"Família",emoji:"🏡",desc:"Uma história natalina com clima de família e fazenda.",search:"Natal na Fazenda da Família Carbell"}
+];
+
+let selected="Todos";
+function render(){
+const term=document.getElementById("search").value.toLowerCase();
+const list=films.filter(f=>(selected==="Todos"||f.genre===selected)&&f.title.toLowerCase().includes(term));
+document.getElementById("movies").innerHTML=list.map(f=>`
+<article class="movie">
+<div class="poster">${f.emoji}<span>${f.title}</span></div>
+<div class="info">
+<h3>${f.title}</h3>
+<small>${f.year} • ${f.genre}</small>
+<p>${f.desc}</p>
+<a class="watch" target="_blank" rel="noopener" href="https://www.youtube.com/results?search_query=${encodeURIComponent(f.search+' grátis') }">🔎 Procurar filme</a>
+</div></article>`).join("");
+document.getElementById("empty").style.display=list.length?"none":"block";
+}
+function filterMovies(){render()}
+function category(c,btn){
+selected=c;
+document.querySelectorAll(".categories button").forEach(b=>b.classList.remove("active"));
+btn.classList.add("active");
+render();
+}
+render();
+</script>
+</body>
+</html>
